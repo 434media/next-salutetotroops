@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/third-parties": "^15.2.1",
     "airtable": "^0.12.2",
     "axios": "^1.8.1",
     "clsx": "^2.1.1",
