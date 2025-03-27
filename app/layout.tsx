@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Geist, Azeret_Mono as Geist_Mono } from "next/font/google"
+import { Analytics } from '@vercel/analytics/next';
 import { GoogleTagManager } from '@next/third-parties/google'
 import "./globals.css"
 
@@ -73,7 +74,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <GoogleTagManager gtmId="G-FXH1ZCNGE8" />
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {children}
+        <Analytics />
+      </body>
     </html>
   )
 }
