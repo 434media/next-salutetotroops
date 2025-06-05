@@ -1,8 +1,10 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Azeret_Mono as Geist_Mono } from "next/font/google"
-import { Analytics } from '@vercel/analytics/next';
-import { GoogleTagManager } from '@next/third-parties/google'
+import { Geist, Geist_Mono } from "next/font/google"
+import { Analytics } from "@vercel/analytics/next"
+import { GoogleTagManager } from "@next/third-parties/google"
+import Script from "next/script"
+import { Suspense } from "react"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -73,12 +75,41 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Meta Pixel Code */}
+        <Script
+          id="meta-pixel"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', '1400547314625549');
+              fbq('track', 'PageView');
+            `,
+          }}
+        />
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=1400547314625549&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
+      </head>
       <GoogleTagManager gtmId="G-FXH1ZCNGE8" />
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {children}
+        <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
       </body>
     </html>
   )
 }
-
