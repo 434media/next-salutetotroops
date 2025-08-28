@@ -6,7 +6,7 @@ export function BackgroundVideo() {
           loop
           muted
           className="absolute w-full h-full object-cover"
-          poster="https://ampd-asset.s3.us-east-2.amazonaws.com/troops-poster.png"
+          poster="https://ampd-asset.s3.us-east-2.amazonaws.com/recap+poster.png"
         >
           <source src="https://ampd-asset.s3.us-east-2.amazonaws.com/Salute-To-Troops.mp4" type="video/mp4" />
           Your browser does not support the video tag.

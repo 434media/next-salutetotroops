@@ -107,7 +107,7 @@ export function Newsletter() {
   }
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full max-w-md">
       <AnimatePresence mode="wait">
         {!isSuccess ? (
           <motion.form
@@ -118,7 +118,6 @@ export function Newsletter() {
             exit={{ opacity: 0, y: -20 }}
             onSubmit={handleSubmit}
           >
-            <h3 className="text-xl font-semibold text-[#749EBF] text-center mb-4">Subscribe to our Newsletter</h3>
             <div className="relative">
               <label htmlFor="email" className="sr-only">
                 Email address
@@ -132,12 +131,12 @@ export function Newsletter() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="w-full px-4 py-3 bg-[#1E2235] rounded-full text-white placeholder-[#4A5069] focus:outline-none focus:ring-2 focus:ring-[#749EBF] transition-all duration-300 text-sm md:text-base"
+                className="w-full px-4 py-3 bg-[#1E2235] rounded-lg text-white placeholder-[#4A5069] focus:outline-none focus:ring-2 focus:ring-[#749EBF] transition-all duration-300 text-sm md:text-base"
               />
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className="absolute right-1 top-1 bottom-1 px-6 bg-[#585C2B] text-white rounded-full hover:bg-[#ED2020] transition-colors disabled:opacity-50 disabled:hover:bg-[#585C2B] text-sm md:text-base"
+                className="absolute right-1 top-1 bottom-1 px-6 bg-[#585C2B] text-white rounded-lg hover:bg-[#ED2020] transition-colors disabled:opacity-50 disabled:hover:bg-[#585C2B] text-sm md:text-base"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -153,7 +152,7 @@ export function Newsletter() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="bg-[#585C2B] px-6 py-3 rounded-full text-white text-center text-sm md:text-base"
+            className="bg-[#585C2B] px-6 py-3 rounded-lg text-white text-center text-sm md:text-base"
           >
             Thanks for subscribing! Check your email to confirm.
           </motion.div>

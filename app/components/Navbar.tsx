@@ -34,7 +34,7 @@ export function Navbar() {
                 alt="Salute to Troops"
                 width={160}
                 height={40}
-                className="w-32 md:w-40 h-auto"
+                className="w-28 md:w-32 h-auto"
                 priority
               />
             </Link>
@@ -53,7 +53,7 @@ export function Navbar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Image src="/mcu.png" alt="Menu" width={32} height={32} className="rounded-full" />
+              <Image src="/mcu.png" alt="Menu" width={36} height={36} className="rounded-full" />
             </motion.button>
           </motion.div>
         </div>
@@ -62,4 +62,3 @@ export function Navbar() {
     </nav>
   )
 }
-
