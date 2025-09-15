@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
         {
           email_address: email,
           status: "subscribed",
-          tags: ["web-salutetotroops"],
+          tags: ["web-salutetotroops", "newsletter-signup"],
         },
         {
           auth: {
@@ -135,7 +135,7 @@ export async function POST(request: NextRequest) {
             await axios.patch(
               `https://${mailchimpDatacenter}.api.mailchimp.com/3.0/lists/${mailchimpListId}/members/${emailHash}`,
               {
-                tags: ["web-salutetotroops"],
+                tags: ["web-salutetotroops", "newsletter-signup"],
               },
               {
                 auth: {
