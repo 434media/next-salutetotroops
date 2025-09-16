@@ -79,11 +79,6 @@ export async function POST(request: NextRequest) {
     const promises: Promise<any>[] = [airtablePromise]
 
     if (mailchimpEnabled) {
-      console.log(
-        "[v0] Mailchimp API URL:",
-        `https://${mailchimpDatacenter}.api.mailchimp.com/3.0/lists/${mailchimpListId}/members`,
-      )
-
       const mailchimpPromise = axios.post(
         `https://${mailchimpDatacenter}.api.mailchimp.com/3.0/lists/${mailchimpListId}/members`,
         {
@@ -114,12 +109,12 @@ export async function POST(request: NextRequest) {
     const errors = []
 
     if (airtableResult.status === "rejected") {
-      console.error("Airtable error:", airtableResult.reason)
+      console.error("Airtable subscription failed")
       errors.push("Airtable subscription failed")
     }
 
     if (mailchimpEnabled && mailchimpResult && mailchimpResult.status === "rejected") {
-      console.error("Mailchimp error:", mailchimpResult.reason)
+      console.error("Mailchimp subscription failed")
 
       const error = mailchimpResult.reason
       if (error?.response?.data) {
@@ -148,7 +143,7 @@ export async function POST(request: NextRequest) {
               },
             )
           } catch (updateError) {
-            console.error("Failed to update existing Mailchimp member:", updateError)
+            console.error("Failed to update existing Mailchimp member")
             errors.push("Mailchimp update failed")
           }
         } else {
@@ -179,7 +174,7 @@ export async function POST(request: NextRequest) {
       )
     }
   } catch (error) {
-    console.error("Error subscribing to newsletter:", error)
+    console.error("Newsletter subscription error occurred")
     return NextResponse.json({ error: "An error occurred while subscribing to the newsletter" }, { status: 500 })
   }
 }

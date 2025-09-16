@@ -9,10 +9,10 @@ const socialLinks = [
 ]
 
 export function Footer() {
-  const currentYear = new Date().getFullYear()
+  // const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="fixed bottom-0 left-0 right-0 bg-[#1A1F35]/90 backdrop-blur-sm py-3">
+    <footer className="fixed bottom-0 left-0 right-0 bg-[#1A1F35]/30 backdrop-blur-md py-3">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <motion.p
@@ -21,7 +21,7 @@ export function Footer() {
             transition={{ duration: 0.5 }}
             className="text-sm text-[#749EBF] sm:text-base order-2 sm:order-1"
           >
-            © {currentYear} 434 MEDIA. All rights reserved.
+            © 434 MEDIA. All rights reserved.
           </motion.p>
         </div>
       </div>
