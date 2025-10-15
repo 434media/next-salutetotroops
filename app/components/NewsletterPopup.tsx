@@ -3,8 +3,8 @@
 import type React from "react"
 import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "motion/react"
-import { X } from "lucide-react"
 import Image from "next/image"
+import { X } from "lucide-react"
 
 // Extend the Window interface to include the turnstile property
 declare global {
@@ -217,15 +217,6 @@ export default function NewsletterPopup({ showModal, onClose }: NewsletterPopupP
                     <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-cyan-300 mx-auto mb-6"></div>
                   </motion.div>
 
-                  <motion.div
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.2 }}
-                    className="mb-6"
-                  >
-                    <h3 className="text-xl lg:text-2xl font-semibold text-slate-200 mb-4">Get the Latest Updates</h3>
-                  </motion.div>
-
                   {/* Value Proposition */}
                   <motion.div
                     initial={{ y: 20, opacity: 0 }}
@@ -233,8 +224,7 @@ export default function NewsletterPopup({ showModal, onClose }: NewsletterPopupP
                     transition={{ delay: 0.3 }}
                   >
                     <p className="text-lg text-slate-300 leading-relaxed font-medium">
-                      Subscribe to our newsletter for exclusive content, insider updates, and be the first to know about
-                      new releases.
+                      Get updates on unique events fostering collaboration between Academia, Industry, and the Military. Subscribe to our newsletter to stay connected.
                     </p>
                   </motion.div>
                 </div>
