@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import Script from "next/script"
@@ -56,15 +56,16 @@ export const metadata: Metadata = {
       "Fostering collaboration between Academia, Industry, and the Military to drive innovation and build community.",
     images: ["https://salutetotroops.com/opengraph-image.png"],
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-icon.png",
   },
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 }
 
 export default function RootLayout({
@@ -119,6 +120,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {/* @ts-expect-error - React 19 type compatibility */}
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
       </body>

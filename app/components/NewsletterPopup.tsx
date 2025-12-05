@@ -186,6 +186,7 @@ export default function NewsletterPopup({ showModal, onClose }: NewsletterPopupP
             className="absolute top-4 right-4 z-20 p-1 md:p-2 bg-slate-800/80 backdrop-blur-sm border border-slate-600 text-white hover:bg-slate-700 hover:border-slate-500 transition-all duration-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-900"
             aria-label="Close newsletter signup"
           >
+            {/* @ts-expect-error - React 19 type compatibility */}
             <X className="h-4 w-4" />
           </button>
 
@@ -193,6 +194,7 @@ export default function NewsletterPopup({ showModal, onClose }: NewsletterPopupP
             {/* Left Side - Image */}
             <div className="lg:w-1/2 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-transparent to-slate-900/40 z-10" />
+              {/* @ts-expect-error - React 19 type compatibility */}
               <Image
                 src="https://ampd-asset.s3.us-east-2.amazonaws.com/recap+poster.png"
                 alt="Newsletter Recap Poster"

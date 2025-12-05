@@ -11,7 +11,7 @@ const gradientAnimation = {
     backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
     transition: {
       duration: 10,
-      ease: "linear",
+      ease: "linear" as const,
       repeat: Number.POSITIVE_INFINITY,
     },
   },
@@ -28,7 +28,9 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex-shrink-0 mt-1">
+            {/* @ts-expect-error - React 19 type compatibility */}
             <Link href="/" passHref>
+              {/* @ts-expect-error - React 19 type compatibility */}
               <Image
                 src="https://ampd-asset.s3.us-east-2.amazonaws.com/troops-darkbg.svg"
                 alt="Salute to Troops"
@@ -53,6 +55,7 @@ export function Navbar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
+              {/* @ts-expect-error - React 19 type compatibility */}
               <Image src="/mcu.png" alt="Menu" width={36} height={36} className="rounded-full" />
             </motion.button>
           </motion.div>
