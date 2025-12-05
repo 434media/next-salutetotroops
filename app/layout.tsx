@@ -120,7 +120,6 @@ export default function RootLayout({
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {/* @ts-expect-error - React 19 type compatibility */}
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
       </body>

@@ -27,10 +27,8 @@ export function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <div className="flex-shrink-0 mt-1">
-            {/* @ts-expect-error - React 19 type compatibility */}
+          <div className="shrink-0 mt-1">
             <Link href="/" passHref>
-              {/* @ts-expect-error - React 19 type compatibility */}
               <Image
                 src="https://ampd-asset.s3.us-east-2.amazonaws.com/troops-darkbg.svg"
                 alt="Salute to Troops"
@@ -42,7 +40,7 @@ export function Navbar() {
             </Link>
           </div>
           <motion.div
-            className="relative p-[2px] rounded-full bg-gradient-to-r from-[#ED2020] via-[#749EBF] to-[#585C2B]"
+            className="relative p-0.5 rounded-full bg-linear-to-r from-[#ED2020] via-[#749EBF] to-[#585C2B]"
             variants={gradientAnimation}
             animate="animate"
             whileHover={{ scale: 1.05, boxShadow: "0 0 15px rgba(237, 32, 32, 0.5)" }}
@@ -55,7 +53,6 @@ export function Navbar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              {/* @ts-expect-error - React 19 type compatibility */}
               <Image src="/mcu.png" alt="Menu" width={36} height={36} className="rounded-full" />
             </motion.button>
           </motion.div>

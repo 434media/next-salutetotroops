@@ -177,7 +177,7 @@ export default function NewsletterPopup({ showModal, onClose }: NewsletterPopupP
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.95, opacity: 0, y: 20 }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="relative w-full max-w-4xl bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto rounded-lg"
+          className="relative w-full max-w-4xl bg-linear-to-br from-slate-900 to-slate-800 border border-slate-700 shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto rounded-lg"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close Button */}
@@ -186,15 +186,13 @@ export default function NewsletterPopup({ showModal, onClose }: NewsletterPopupP
             className="absolute top-4 right-4 z-20 p-1 md:p-2 bg-slate-800/80 backdrop-blur-sm border border-slate-600 text-white hover:bg-slate-700 hover:border-slate-500 transition-all duration-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-900"
             aria-label="Close newsletter signup"
           >
-            {/* @ts-expect-error - React 19 type compatibility */}
             <X className="h-4 w-4" />
           </button>
 
           <div className="flex flex-col lg:flex-row min-h-[500px] md:min-h-[600px]">
             {/* Left Side - Image */}
             <div className="lg:w-1/2 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-slate-900/40 z-10" />
-              {/* @ts-expect-error - React 19 type compatibility */}
+              <div className="absolute inset-0 bg-linear-to-r from-transparent to-slate-900/40 z-10" />
               <Image
                 src="https://ampd-asset.s3.us-east-2.amazonaws.com/recap+poster.png"
                 alt="Newsletter Recap Poster"
@@ -216,7 +214,7 @@ export default function NewsletterPopup({ showModal, onClose }: NewsletterPopupP
                     className="mb-6"
                   >
                     <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">Join our Community</h2>
-                    <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-cyan-300 mx-auto mb-6"></div>
+                    <div className="w-16 h-1 bg-linear-to-r from-blue-400 to-cyan-300 mx-auto mb-6"></div>
                   </motion.div>
 
                   {/* Value Proposition */}
@@ -267,7 +265,7 @@ export default function NewsletterPopup({ showModal, onClose }: NewsletterPopupP
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white py-4 px-8 font-semibold text-lg rounded-lg transition-all duration-300 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-900 active:scale-[0.98] transform shadow-lg"
+                        className="w-full bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white py-4 px-8 font-semibold text-lg rounded-lg transition-all duration-300 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-900 active:scale-[0.98] transform shadow-lg"
                         aria-label="Subscribe to newsletter"
                       >
                         <motion.div
@@ -312,7 +310,7 @@ export default function NewsletterPopup({ showModal, onClose }: NewsletterPopupP
                       aria-live="polite"
                     >
                       <div className="mb-4">
-                        <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center mx-auto mb-4 rounded-full">
+                        <div className="w-16 h-16 bg-linear-to-r from-green-500 to-emerald-500 flex items-center justify-center mx-auto mb-4 rounded-full">
                           <motion.div
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}

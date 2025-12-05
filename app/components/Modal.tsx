@@ -62,7 +62,7 @@ export function Modal({ onClose }: ModalProps) {
             transition={{ delay: 0.1 }}
           >
             <div className="space-y-2">
-              <h1 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 leading-tight">
+              <h1 className="text-2xl font-black text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-300 leading-tight">
                 Salute to Troops
               </h1>
               <p className="text-sm text-slate-300 font-medium leading-relaxed">
@@ -147,7 +147,7 @@ export function Modal({ onClose }: ModalProps) {
                 href="https://buy.stripe.com/28o6oSabocgU8jC5kk"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white text-sm font-bold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                className="inline-flex items-center justify-center w-full px-6 py-3 bg-linear-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white text-sm font-bold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
