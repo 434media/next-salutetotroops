@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withBotId } from "botid/next/config";
 
 const nextConfig: NextConfig = {
   typescript: {
@@ -9,12 +10,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "ampd-assets.s3.us-east-2.amazonaws.com",
-        port: "",
-        pathname: "/**",
+        hostname: "storage.googleapis.com",
+        pathname: "/groovy-ego-462522-v2.firebasestorage.app/**",
       },
     ],
   },
 };
 
-export default nextConfig;
+export default withBotId(nextConfig);

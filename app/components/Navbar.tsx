@@ -30,7 +30,7 @@ export function Navbar() {
           <div className="shrink-0 mt-1">
             <Link href="/" passHref>
               <Image
-                src="https://ampd-asset.s3.us-east-2.amazonaws.com/troops-darkbg.svg"
+                src="https://storage.googleapis.com/groovy-ego-462522-v2.firebasestorage.app/troops-darkbg.svg"
                 alt="Salute to Troops"
                 width={160}
                 height={40}

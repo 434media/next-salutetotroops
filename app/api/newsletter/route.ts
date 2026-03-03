@@ -1,82 +1,37 @@
 import { type NextRequest, NextResponse } from "next/server"
-import Airtable from "airtable"
+import { checkBotId } from "botid/server"
+import { db } from "@/app/lib/firebase"
+import { FieldValue } from "firebase-admin/firestore"
 import axios from "axios"
 import crypto from "crypto"
 
-const isDevelopment = process.env.NODE_ENV === "development"
-
-const airtableBaseId = process.env.AIRTABLE_BASE_ID
-const airtableApiKey = process.env.AIRTABLE_API_KEY
-const turnstileSecretKey = process.env.TURNSTILE_SECRET_KEY
 const mailchimpApiKey = process.env.MAILCHIMP_API_KEY
 const mailchimpListId = process.env.MAILCHIMP_AUDIENCE_ID
-
-if (!airtableBaseId || !airtableApiKey) {
-  throw new Error("Airtable configuration is missing")
-}
-
-const base = new Airtable({ apiKey: airtableApiKey }).base(airtableBaseId)
-
 const mailchimpDatacenter = mailchimpApiKey ? mailchimpApiKey.split("-").pop() : null
 
 export async function POST(request: NextRequest) {
   try {
-    const { email } = await request.json()
-    const turnstileToken = request.headers.get("cf-turnstile-response")
-    const remoteIp = request.headers.get("CF-Connecting-IP")
-
-    if (!airtableBaseId || !airtableApiKey) {
-      console.error("Airtable configuration is missing")
-      return NextResponse.json({ error: "Server configuration error" }, { status: 500 })
+    // Verify the request is not from a bot
+    const verification = await checkBotId()
+    if (verification.isBot) {
+      return NextResponse.json({ error: "Access denied" }, { status: 403 })
     }
+
+    const { email } = await request.json()
 
     const mailchimpEnabled = mailchimpApiKey && mailchimpListId
     if (!mailchimpEnabled) {
       console.warn("Mailchimp integration disabled - missing API key or Audience ID")
     }
 
-    if (!isDevelopment) {
-      if (!turnstileSecretKey) {
-        console.error("Turnstile secret key is not defined")
-        return NextResponse.json({ error: "Server configuration error" }, { status: 500 })
-      }
+    // Save to Firestore
+    const firestorePromise = db.collection("newsletter_signups").add({
+      email,
+      source: "Salute",
+      createdAt: FieldValue.serverTimestamp(),
+    })
 
-      // Verify Turnstile token
-      if (turnstileToken) {
-        const idempotencyKey = crypto.randomUUID()
-        const turnstileVerification = await axios.post(
-          "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-          new URLSearchParams({
-            secret: turnstileSecretKey,
-            response: turnstileToken,
-            remoteip: remoteIp || "",
-            idempotency_key: idempotencyKey,
-          }),
-          {
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          },
-        )
-
-        if (!turnstileVerification.data.success) {
-          const errorCodes = turnstileVerification.data["error-codes"] || []
-          console.error("Turnstile verification failed:", errorCodes)
-          return NextResponse.json({ error: "Turnstile verification failed", errorCodes }, { status: 400 })
-        }
-      } else {
-        return NextResponse.json({ error: "Turnstile token is missing" }, { status: 400 })
-      }
-    }
-
-    const airtablePromise = base("Email Sign Up (All Sites)").create([
-      {
-        fields: {
-          Email: email,
-          Source: "Salute",
-        },
-      },
-    ])
-
-    const promises: Promise<any>[] = [airtablePromise]
+    const promises: Promise<any>[] = [firestorePromise]
 
     if (mailchimpEnabled) {
       const mailchimpPromise = axios.post(
@@ -103,14 +58,14 @@ export async function POST(request: NextRequest) {
 
     const results = await Promise.allSettled(promises)
 
-    const airtableResult = results[0]
+    const firestoreResult = results[0]
     const mailchimpResult = mailchimpEnabled ? results[1] : null
 
     const errors = []
 
-    if (airtableResult.status === "rejected") {
-      console.error("Airtable subscription failed")
-      errors.push("Airtable subscription failed")
+    if (firestoreResult.status === "rejected") {
+      console.error("Firestore save failed:", firestoreResult.reason)
+      errors.push("Firestore save failed")
     }
 
     if (mailchimpEnabled && mailchimpResult && mailchimpResult.status === "rejected") {
@@ -124,7 +79,6 @@ export async function POST(request: NextRequest) {
           errors.push("Mailchimp authentication failed")
         } else if (responseData?.title === "Member Exists") {
           console.log("Email already exists in Mailchimp, updating tags")
-          // Try to update existing member with tags
           try {
             const emailHash = crypto.createHash("md5").update(email.toLowerCase()).digest("hex")
             await axios.patch(
@@ -167,7 +121,7 @@ export async function POST(request: NextRequest) {
     } else {
       return NextResponse.json(
         {
-          error: mailchimpEnabled ? "Both services failed" : "Airtable service failed",
+          error: mailchimpEnabled ? "Both services failed" : "Firestore service failed",
           details: errors,
         },
         { status: 500 },

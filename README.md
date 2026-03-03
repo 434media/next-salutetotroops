@@ -10,8 +10,8 @@ This application is built with Next.js, TypeScript, and Tailwind CSS, featuring 
 -   **Language**: [TypeScript](https://www.typescriptlang.org/)
 -   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 -   **Animations**: [Motion](https://motion.dev/)
--   **Newsletter Backend**: [Airtable](https://airtable.com/)
--   **Spam Protection**: [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/)
+-   **Newsletter Backend**: [Google Firestore](https://firebase.google.com/docs/firestore)
+-   **Spam Protection**: [Vercel BotID](https://vercel.com/docs/botid)
 -   **Analytics**: [Vercel Analytics](https://vercel.com/analytics), Google Analytics, Meta Pixel
 
 ## Project Structure
@@ -71,21 +71,17 @@ Create a `.env.local` file in the root of the project by copying the example fil
 cp .env.local.example .env.local
 ```
 
-Now, open `.env.local` and add your credentials for Airtable and Cloudflare Turnstile.
+Now, open `.env.local` and add your credentials for Google Firestore.
 
 ```env
 # .env.local
 
-# Airtable Credentials
-# Get these from your Airtable account settings and base.
-AIRTABLE_API_KEY=your_airtable_api_key
-AIRTABLE_BASE_ID=your_airtable_base_id
-
-# Cloudflare Turnstile Credentials
-# Get these from your Cloudflare dashboard.
-NEXT_PUBLIC_TURNSTILE_SITE_KEY=your_turnstile_site_key
-TURNSTILE_SECRET_KEY=your_turnstile_secret_key
+# Google Service Account Key (JSON string)
+# Get this from your Google Cloud Console → IAM & Admin → Service Accounts.
+GOOGLE_SERVICE_ACCOUNT_KEY='{"type":"service_account", ...}'
 ```
+
+> **Note:** Bot protection is handled by [Vercel BotID](https://vercel.com/docs/botid) — no additional environment variables are needed.
 
 ### 4. Run the Development Server
 
