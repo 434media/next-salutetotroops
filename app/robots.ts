@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/private/",
     },
-    sitemap: "https://salutetotroops.com/sitemap.xml",
+    sitemap: "https://www.salutetotroops.com/sitemap.xml",
   }
 }
 
