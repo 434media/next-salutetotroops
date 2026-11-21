@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://salutetotroops.com"),
+  metadataBase: new URL("https://www.salutetotroops.com"),
   title: {
     default: "Salute to Troops | Event Marketing Platform",
     template: "%s | Salute to Troops",
@@ -37,11 +37,11 @@ export const metadata: Metadata = {
     title: "Salute to Troops | Event Marketing Platform",
     description:
       "Fostering collaboration between Academia, Industry, and the Military to drive innovation and build community.",
-    url: "https://salutetotroops.com",
+    url: "https://www.salutetotroops.com",
     siteName: "Salute to Troops",
     images: [
       {
-        url: "https://salutetotroops.com/opengraph-image.png",
+        url: "https://www.salutetotroops.com/opengraph-image.png",
         width: 1200,
         height: 630,
       },
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     title: "Salute to Troops | Event Marketing Platform",
     description:
       "Fostering collaboration between Academia, Industry, and the Military to drive innovation and build community.",
-    images: ["https://salutetotroops.com/opengraph-image.png"],
+    images: ["https://www.salutetotroops.com/opengraph-image.png"],
   },
   icons: {
     icon: "/favicon.ico",
